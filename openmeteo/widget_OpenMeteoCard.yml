@@ -52,7 +52,7 @@ props:
       label: Настройки
     - name: looknfeel
       label: Настройка внешнего вида
-timestamp: Jan 16, 2023, 2:35:54 AM
+timestamp: Jan 16, 2023, 6:30:02 PM
 component: f7-card
 config:
   class:
@@ -412,7 +412,7 @@ slots:
                                 for: hour
                                 fragment: true
                                 rangeStart: 0
-                                rangeStop: "=Number(props.forecastHours)"
+                                rangeStop: =Number(props.forecastHours)
                                 sourceType: range
                               slots:
                                 default:
@@ -482,11 +482,11 @@ slots:
                                                       'wi:sleet'
                                                     : [61,63,65,66,67].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
                                                       'wi:showers'
-                                                    : ['71','73','75','77','85','86'].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
+                                                    : [71,73,75,77,85,86].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
                                                       'wi:snow-wind'
-                                                    : ['80','81','82'].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
+                                                    : [80,81,82].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
                                                       'wi:rain'
-                                                    : ['95','96','99'].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
+                                                    : [95,96,99].includes(JSON.parse(items[((!props.itemPrefix) ? '' : props.itemPrefix) + 'Hourly_Weather_Code'].state)[Number.parseInt(dayjs().format('H')) + 25 + loop.hour]) ?
                                                       'wi:storm-showers'
                                                     : '-')
                                                   style:
