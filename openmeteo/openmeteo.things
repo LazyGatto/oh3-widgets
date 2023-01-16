@@ -1,0 +1,75 @@
+Thing http:url:openmeteo "OpenMeteo" [
+
+    baseURL="https://api.open-meteo.com/v1/forecast?latitude=55.754808&longitude=37.625949&current_weather=true&windspeed_unit=ms&timezone=Europe/Moscow&past_days=1",
+    refresh=60] {
+
+        Channels:
+    
+            Type number : latitude "Latitude" [ stateTransformation="JSONPATH:$.latitude", mode="READONLY" ]
+            Type number : longitude "Longitude" [ stateTransformation="JSONPATH:$.longitude", mode="READONLY" ]
+
+            Type number : currentTemperature "Current Temperature" [ stateTransformation="JSONPATH:$.current_weather.temperature", mode="READONLY" ]
+            Type number : currentWindspeed "Current Windspeed" [ stateTransformation="JSONPATH:$.current_weather.windspeed", mode="READONLY" ]
+            Type number : currentWinddirection "Current Winddirection" [ stateTransformation="JSONPATH:$.current_weather.winddirection", mode="READONLY" ]
+            Type number : currentWeathercode "Current Weathercode" [ stateTransformation="JSONPATH:$.current_weather.weathercode", mode="READONLY" ]
+            Type datetime : currentWeathertime "Current Weather Time" [ stateTransformation="JSONPATH:$.current_weather.time", mode="READONLY" ]
+
+            // Hourly
+            Type string : hourlyTime "Hourly Time" [ 
+                stateTransformation = "JSONPATH:$.hourly.time", 
+                mode="READONLY",
+                stateExtension = "&hourly=dewpoint_2m,precipitation,rain,showers,snowfall,snow_depth,freezinglevel_height"
+            ]
+            Type string : hourlyTemperature "Hourly Temperature" [ 
+                stateTransformation="JSONPATH:$.hourly.temperature_2m", 
+                mode="READONLY",
+                stateExtension = "&hourly=temperature_2m"
+            ]
+            Type string : hourlyHumidity "Hourly Humidity" [ 
+                stateTransformation="JSONPATH:$.hourly.relativehumidity_2m", 
+                mode="READONLY",
+                stateExtension = "&hourly=relativehumidity_2m"
+            ]
+            Type string : hourlyApparentTemperature "Hourly Apparent Temperature" [ 
+                stateTransformation="JSONPATH:$.hourly.apparent_temperature", 
+                mode="READONLY",
+                stateExtension = "&hourly=apparent_temperature"
+            ]                
+            Type string : hourlyWeatherCode "Hourly Weather Code" [ 
+                stateTransformation="JSONPATH:$.hourly.weathercode", 
+                mode="READONLY",
+                stateExtension = "&hourly=weathercode"
+            ]                
+
+            // Daily
+            Type string : dailyTime "Daily Time" [ 
+                stateTransformation="JSONPATH:$.daily.time", 
+                mode="READONLY",
+                stateExtension = "&daily=apparent_temperature_max,apparent_temperature_min"
+            ]
+            Type string : dailyWeatherCode "Daily Weather Code" [ 
+                stateTransformation="JSONPATH:$.daily.weathercode", 
+                mode="READONLY",
+                stateExtension = "&daily=weathercode"
+            ]
+            Type string : dailyTemperatureMax "Daily Temperature Max" [ 
+                stateTransformation="JSONPATH:$.daily.temperature_2m_max",
+                mode="READONLY",
+                stateExtension = "&daily=temperature_2m_max"
+            ]
+            Type string : dailyTemperatureMin "Daily Temperature Min" [ 
+                stateTransformation="JSONPATH:$.daily.temperature_2m_min",
+                mode="READONLY",
+                stateExtension = "&daily=temperature_2m_min"
+            ]
+            Type string : dailySunrise "Daily Sunrise" [ 
+                stateTransformation="JSONPATH:$.daily.sunrise", 
+                mode="READONLY",
+                stateExtension = "&daily=sunrise"
+            ]
+            Type string : dailySunset "Daily Sunset" [ 
+                stateTransformation="JSONPATH:$.daily.sunset", 
+                mode="READONLY",
+                stateExtension = "&daily=sunset"
+            ]
+}
